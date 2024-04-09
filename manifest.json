@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Guidde Extractor",
+  "version": "1.0.1",
+  "description": "Extracts Guidde video and screenshots to a local zip file",
+  "minimum_chrome_version": "116",
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_title": "Click to Guidde extractor panel"
+  },
+  "content_scripts": [
+    {
+      "js": ["content-script.js", "inject.js"],
+      "css": ["content-style.css"],
+      "matches": ["https://*.guidde.com/*", "https://guidde.com/*"],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": ["sidePanel", "tabs", "webRequest", "storage"],
+  "host_permissions": [ "*://*.guidde.com/*"],
+  "web_accessible_resources": [{
+      "resources": ["injected.js"],
+      "matches": ["https://*.guidde.com/*", "https://guidde.com/*"]
+  }],
+  "externally_connectable": {
+    "matches": ["https://*.guidde.com/*", "https://guidde.com/*"]
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  }
+}
