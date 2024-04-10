@@ -3,10 +3,9 @@ Chrome extension to package guidde content for local display
 
 ## Usage
 1. Open a Guidde playbook with a URL like this: (https://app.guidde.com/share/playbooks/playbook_id) in Chrome
-2. Open the sidepanel for the extension by clicking on the extension icon
-3. Initialize the extractor by clicking Initialize
-4. Set the required options
-5. Click "Extract!"
+2. Open the side panel for the extension by clicking on the extension icon
+3. Set the required options
+4. Click "Extract!"
 
 The extension will extract the video with poster and subtitles as well as the individual steps with screenshot and titles
 
