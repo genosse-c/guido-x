@@ -24,21 +24,14 @@
  */
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  document.getElementById('guido-x-init').addEventListener('click', initializeGuidde, false);
+  document.getElementById('guido-x').addEventListener('click', (e) => reformatGuidde(e), false);
 });
-
-//for some reason, first click on the button never works
-//therefore I've added a dummy button that can be clicked multiple times without consequence
-function initializeGuidde(){
-  let extract = document.getElementById('guido-x');
-  extract.classList.toggle('hide');
-  extract.addEventListener('click', () => reformatGuidde(), false);
-  document.getElementById('guido-x-init').classList.toggle('hide')
-}
 
 //main function to build the new index.html page
 //and collect the required files
-async function reformatGuidde() {
+async function reformatGuidde(ev) {
+  ev.preventDefault();
+
   let settings = {};
   Array.from(document.querySelector('form').elements).forEach(function(e){
     if (e.nodeName !== "BUTTON"){
