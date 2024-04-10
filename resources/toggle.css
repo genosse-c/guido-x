@@ -1,0 +1,208 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('roboto-regular.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+body{
+  font-family: "Roboto", sans-serif;
+  margin: 2em;
+}
+video {
+  max-width: 99%;
+  border: 2px solid var(--theme-color);;
+  border-radius: 1em;
+  height: auto;
+  max-height: 65vh;
+}
+section {
+    width: 100%;
+    max-height: 80vh;
+}
+section.slide{
+  margin-bottom: 4em;
+}
+figure{
+    width: 100%;
+    margin: 0;
+    max-height: min-content;
+}
+img{
+    max-width: 99%;
+    border: 2px solid var(--theme-color);;
+    border-radius: 1em;
+    height: auto;
+    max-height: 65vh;
+    margin: auto;
+}
+figcaption.caption{
+    margin:1em 0;
+    font-size: larger;
+}
+
+/* tiny slider */
+.tns-outer {
+  position: relative;
+}
+nav.visi-controls button{
+  right: 0;
+  top: 3px;
+}
+.tns-controls [aria-controls], nav.visi-controls button, .tns-outer>button{
+  position: absolute;
+  z-index: 1000;
+  font-size: 15px;
+  margin: 0 5px;
+  padding: 0 1em;
+  height: 2.5em;
+  color: #000;
+  background: var(--theme-color);
+  border-radius: 3px;
+  border: 0;
+}
+.tns-controls { text-align: center; margin-bottom: 10px; }
+.tns-controls [aria-controls] {
+  bottom: 0;
+}
+.tns-outer>button{
+  left: 3em;
+  bottom: 0;
+}
+.tns-controls :first-child{
+  left: 0;
+}
+.tns-controls :last-child{
+  right: 0;
+}
+
+[data-action] {
+  display: block;
+  margin: 10px auto;
+  font-size: 17px;
+  min-width: 3em;
+  text-align: center;
+  background: transparent;
+  border: 0;
+}
+.tns-controls [disabled] { 
+  color: #999999;
+  background: #B3B3B3; 
+  cursor: not-allowed !important;
+}
+.tns-nav {
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  margin: 10px auto;
+  width: 95%;
+}
+.tns-nav > [aria-controls] {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  margin: 0 5px;
+  border-radius: 50%;
+  background: #ddd;
+  border: 0;
+}
+.tns-nav > .tns-nav-active { background: #999; }
+.playbutton-wrapper { text-align: center; }
+.playbutton-wrapper button { height: 34px; padding: 0 10px; font-size: 14px; background: #fff; border-radius: 3px; border: 1px solid  #ccc; cursor: pointer; }
+
+}
+section {
+    width: 100%;
+    max-height: 80vh;
+}
+section.slide{
+  margin-bottom: 4em;
+}
+figure{
+    width: 100%;
+    margin: 0;
+    max-height: min-content;
+}
+img{
+    max-width: 99%;
+    border: 2px solid var(--theme-color);;
+    border-radius: 1em;
+    height: auto;
+    max-height: 65vh;
+    margin: auto;
+}
+figcaption.caption{
+    margin:1em 0;
+    font-size: larger;
+}
+
+.hide{
+  display: none;
+}
+/* tiny slider */
+nav.visi-controls button{
+  right: 0;
+  top: 3px;
+}
+.tns-controls [aria-controls], nav.visi-controls button, .tns-outer>button{
+  position: absolute;
+  z-index: 1000;
+  font-size: 15px;
+  margin: 0 5px;
+  padding: 0 1em;
+  height: 2.5em;
+  color: #000;
+  background: var(--theme-color);
+  border-radius: 3px;
+  border: 0;
+}
+.tns-controls { text-align: center; margin-bottom: 10px; }
+.tns-controls [aria-controls] {
+  bottom: 0;
+}
+.tns-outer>button{
+  left: 3em;
+  bottom: 0;
+}
+.tns-controls :first-child{
+  left: 0;
+}
+.tns-controls :last-child{
+  right: 0;
+}
+
+[data-action] {
+  display: block;
+  margin: 10px auto;
+  font-size: 17px;
+  min-width: 3em;
+  text-align: center;
+  background: transparent;
+  border: 0;
+}
+.tns-controls [disabled] { 
+  color: #999999;
+  background: #B3B3B3; 
+  cursor: not-allowed !important;
+}
+.tns-nav {
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  margin: 10px auto;
+  width: 95%;
+}
+.tns-nav > [aria-controls] {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  margin: 0 5px;
+  border-radius: 50%;
+  background: #ddd;
+  border: 0;
+}
+.tns-nav > .tns-nav-active { background: #999; }
+.playbutton-wrapper { text-align: center; }
+.playbutton-wrapper button { height: 34px; padding: 0 10px; font-size: 14px; background: #fff; border-radius: 3px; border: 1px solid  #ccc; cursor: pointer; }
+

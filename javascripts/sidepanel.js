@@ -184,22 +184,23 @@ class IndexTpl extends HtmlTpl {
     if(this.settings['presentation'] == 'plain'){
       Array.from(index.querySelectorAll('.extra')).forEach((e) => e.remove());
     } else if (this.settings['presentation'] == 'toggle'){
-      main.insertAdjacentHTML('beforeend','<nav class="visi-controls"><button>Slideshow</button></nav>');
+      body.insertAdjacentHTML('beforeend','<nav class="visi-controls"><button>Slideshow</button></nav>');
     }
     return index;
   }
 
   getURLsAndFilenames(){
-    let files = [
-      ['resources/styles.css','resources/styles.css'],
-      ['resources/roboto-regular.woff2','resources/roboto-regular.woff2']
-    ];
+    let files = [['resources/roboto-regular.woff2','resources/roboto-regular.woff2']];
     //different forms of presentation require different styles / javascripts
     switch (this.settings['presentation']) {
       case 'plain':
+        files.push(
+          ['resources/plain.css','resources/styles.css']
+        );
         break;
       case 'slideshow':
         files.push(
+          ['resources/slideshow.css','resources/styles.css'],
           ['resources/tiny-slider.js','resources/tiny-slider.js'],
           ['resources/tiny-slider.css','resources/tiny-slider.css'],
           ['resources/slideshow.js','resources/javascript.js']
@@ -207,6 +208,7 @@ class IndexTpl extends HtmlTpl {
         break;
       case 'toggle':
         files.push(
+          ['resources/toggle.css','resources/styles.css'],
           ['resources/tiny-slider.js','resources/tiny-slider.js'],
           ['resources/tiny-slider.css','resources/tiny-slider.css'],
           ['resources/toggle.js','resources/javascript.js']

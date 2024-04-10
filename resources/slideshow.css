@@ -8,9 +8,14 @@
 }
 body{
   font-family: "Roboto", sans-serif;
+  margin: 2em;
 }
 video {
-  width: 100%;
+  max-width: 99%;
+  border: 2px solid var(--theme-color);;
+  border-radius: 1em;
+  height: auto;
+  max-height: 65vh;
 }
 section {
     width: 100%;
@@ -37,10 +42,10 @@ figcaption.caption{
     font-size: larger;
 }
 
-.hide{
-  display: none;
-}
 /* tiny slider */
+.tns-outer {
+  position: relative;
+}
 nav.visi-controls button{
   right: 0;
   top: 3px;
