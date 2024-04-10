@@ -2,7 +2,7 @@
 Chrome extension to package guidde content for local display
 
 ## Usage
-1. Open a Guidde playbook with a URL like this: https://app.guidde.com/share/playbooks/<playbook_id> in Chrome
+1. Open a Guidde playbook with a URL like this: (https://app.guidde.com/share/playbooks/playbook_id) in Chrome
 2. Open the sidepanel for the extension by clicking on the extension icon
 3. Initialize the extractor by clicking Initialize
 4. Set the required options
@@ -19,7 +19,11 @@ Allows you to define the background color for control elements of the slideshow 
 3. Toggle between Video and Slideshow: Click a toggle button to either see the video or the steps as slideshow
 
 ## Installation
-At the moment, you need to manually install this extension. For more information see 
+At the moment, you need to manually install this extension. 
+You can download this project as zip file and extract it to a folder of your choosing. 
+Than install the extension as unpacked extension in Chrome.
+
+For more information see 
 [Loading Unpacked Extensions](https://knowledge.workspace.google.com/kb/load-unpacked-extensions-000005962#problem)
 
 ## The usual
