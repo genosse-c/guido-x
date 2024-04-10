@@ -10,8 +10,19 @@
     <p>Extracts video, screenshots, texts and titles from a Guidde presentation</p>
     <form action="#" id="guido_form">
       <button id="guido-x" type="submit" class="btn btn-primary">Extract!</button>
+      <label>
+        Theme color:
+        <input type="text" name="theme-color" value="#66ccff59"/>
+      </label>
+      <label>
+        Select form of presentation:
+        <select name="presentation">
+          <option value="plain">Video and Steps</option>
+          <option value="slideshow">Video and Slideshow</option>
+          <option value="toggle" selected="true">Toggle between video and slideshow</option>
+        </select>
+      </label>
     </form>
-
     <div class="progress hide" id="progress_bar">
         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
         </div>
@@ -41,20 +52,14 @@
           <meta charset="utf-8" />
           <title></title>
           <link rel="stylesheet" href="resources/styles.css">
-          <link rel="stylesheet" href="resources/tiny-slider.css">
-          <script type="text/javascript" src="resources/tiny-slider.js"></script>
+          <link class="extra" rel="stylesheet" href="resources/tiny-slider.css">
+          <script class="extra" type="text/javascript" src="resources/tiny-slider.js"></script>
+          <script class="extra" type="text/javascript" src="resources/javascript.js"></script>
+          <style>:root {--theme-color: #66ccff59;}</style>
         </headElement>
         <bodyElement>
           <main class="slideshow"></main>
         </bodyElement>
-        <script>
-          var slider = tns({
-            container: 'main.slideshow',
-            slideBy: 'page',
-            autoplay: true,
-            navPosition: 'bottom'
-          });
-        </script>
       </htmlElement>
     </template>
   </body>

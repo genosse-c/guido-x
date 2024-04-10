@@ -4,3 +4,13 @@ form{
 body{
   padding: .5em;
 }
+label {
+  display: block;
+  margin: 1em 0;
+}
+input[type="text"], select{
+  display: block;
+}
+select{
+  height: 2em;
+}

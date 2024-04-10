@@ -1,20 +1,21 @@
-//top level await is available in ES modules loaded from script tags
-const [tab] = await chrome.tabs.query({
-  active: true,
-  lastFocusedWindow: true
-});
-
 const button = document.getElementById('guido-x');
 button.addEventListener('click', reformatGuidde);
 
 //main function to build the new index.html page
 //and collect the required files
 async function reformatGuidde() {
+  let settings = {};
+  Array.from(document.querySelector('form').elements).forEach(function(e){
+    if (e.nodeName !== "BUTTON"){
+      settings[e.name] = e.value;
+    }
+  });
+  console.log(settings);
   const qg = await chrome.storage.local.get(["playbook"])
 
   let slides = getSlides(qg);
   let video = getVideo(qg);
-  let index = getIndex(slides, video, qg);
+  let index = getIndex(slides, video, qg, settings);
 
   let files = [];
   [index, video, ...slides].forEach(function(o){
@@ -25,11 +26,12 @@ async function reformatGuidde() {
 
 //build index html page and include slides, video
 //template for index is stored in template tag
-function getIndex(slides, video, qg) {
+function getIndex(slides, video, qg, settings) {
   let i = new IndexTpl(
     qg.playbook.title,
     slides,
-    video
+    video,
+    settings
   );
   return i;
 }
@@ -95,7 +97,7 @@ class HtmlTpl {
 }
 //templating class for index.html page
 class IndexTpl extends HtmlTpl {
-  constructor(title, slides, video){
+  constructor(title, slides, video, settings){
     super();
     if (!title){
       this.showErrror("Index template: Document title missing. Wrong input format?")
@@ -112,36 +114,75 @@ class IndexTpl extends HtmlTpl {
     } else {
       this.video = video;
     }
+    if (!settings){
+      this.showError("Index template: Settings are missing.")
+    } else {
+      this.settings = settings;
+    }
   }
 
   title = '';
   video = null;
   slides = null;
   selector = "#index";
+  settings = '';
 
   render() {
     let index = this.template();
+    //set title of document
     index.querySelector('title').textContent = this.title;
+    //set theme color
+    let style = index.querySelector('style');
+    style.textContent = `:root {--theme-color: ${this.settings['theme-color']};}`;
+    //render video
     let body = index.querySelector('bodyElement');
     body.prepend(this.video.render());
+    //render slides
     let main = index.querySelector('main');
     this.slides.forEach((s) => main.append( s.render() ));
+    //configure presentation
+    if(this.settings['presentation'] == 'plain'){
+      Array.from(index.querySelectorAll('.extra')).forEach((e) => e.remove());
+    } else if (this.settings['presentation'] == 'toggle'){
+      main.insertAdjacentHTML('beforeend','<nav class="visi-controls"><button>Slideshow</button></nav>');
+    }
     return index;
   }
 
   getURLsAndFilenames(){
-    return [
+    let files = [
       ['resources/styles.css','resources/styles.css'],
-      ['resources/tiny-slider.js','resources/tiny-slider.js'],
-      ['resources/tiny-slider.css','resources/tiny-slider.css'],
       ['resources/roboto-regular.woff2','resources/roboto-regular.woff2']
     ];
+    //different forms of presentation require different styles / javascripts
+    switch (this.settings['presentation']) {
+      case 'plain':
+        break;
+      case 'slideshow':
+        files.push(
+          ['resources/tiny-slider.js','resources/tiny-slider.js'],
+          ['resources/tiny-slider.css','resources/tiny-slider.css'],
+          ['resources/slideshow.js','resources/javascript.js']
+        );
+        break;
+      case 'toggle':
+        files.push(
+          ['resources/tiny-slider.js','resources/tiny-slider.js'],
+          ['resources/tiny-slider.css','resources/tiny-slider.css'],
+          ['resources/toggle.js','resources/javascript.js']
+        );
+      break
+    }
+    return files;
   }
 
   toString() {
     let s = new XMLSerializer();
     let str = s.serializeToString(this.render());
+    //template tags cannot contain html, head, body elements
+    //therefore custom element names have been used that need to be renamed
     str = str.replace(/(html|head|body)element/gm, "$1");
+    //adding the doctype declaration to the start of index.html
     return "<!DOCTYPE html>"+str;
   }
 }
