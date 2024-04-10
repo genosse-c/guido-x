@@ -12,8 +12,7 @@
   },
   "content_scripts": [
     {
-      "js": ["content-script.js", "inject.js"],
-      "css": ["content-style.css"],
+      "js": ["inject.js"],
       "matches": ["https://*.guidde.com/*", "https://guidde.com/*"],
       "run_at": "document_start"
     }

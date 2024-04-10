@@ -1,9 +1,0 @@
-#guido-x-panel{
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  margin: 50px;
-  border: 1px solid blue;
-  border-radius: 5px;
-  z-index: 1000;
-}

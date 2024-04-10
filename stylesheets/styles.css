@@ -14,3 +14,6 @@ input[type="text"], select{
 select{
   height: 2em;
 }
+.hide{
+  display: none;
+}

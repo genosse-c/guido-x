@@ -21,8 +21,7 @@ function urlToPromise(url) {
 
 //creates a zip containing the generated index.html file
 //and all files linked from index.html
-//TODO: ensure better naming of downloaded zip
-function createZip(index, files) {
+function createZip(zipname, index, files) {
     resetMessage();
     var zip = new JSZip();
     zip.file("index.html", index);
@@ -43,7 +42,7 @@ function createZip(index, files) {
         .then(function callback(blob) {
 
             // see FileSaver.js
-            saveAs(blob, "example.zip");
+            saveAs(blob, `${zipname}.zip`);
 
             showMessage("done !");
         }, function (e) {

@@ -1,5 +1,40 @@
-const button = document.getElementById('guido-x');
-button.addEventListener('click', reformatGuidde);
+/*
+ * Guidde Extractor
+ *
+ * Copyright 2024 Conrad Noack
+ *
+ * Apr 10 2024
+ *
+ * this software relies on:
+ *
+ *   JSZip v3.10.1 - A JavaScript class for generating and reading zip files
+ *   Copyright (c) 2009-2016 Stuart Knightley, David Duponchel, Franz Buchinger, António Afonso
+ *   <http://stuartk.com/jszip>
+ *
+ *   FileSaver.js
+ *   A saveAs() FileSaver implementation.
+ *   By Eli Grey, http://eligrey.com
+ *
+ *   Tiny Slider
+ *   https://github.com/ganlanyuan/tiny-slider
+ *   Copyright (c) 2021 William Lin
+ *
+ * All MIT licensed
+ *
+ */
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  document.getElementById('guido-x-init').addEventListener('click', initializeGuidde, false);
+});
+
+//for some reason, first click on the button never works
+//therefore I've added a dummy button that can be clicked multiple times without consequence
+function initializeGuidde(){
+  let extract = document.getElementById('guido-x');
+  extract.classList.toggle('hide');
+  extract.addEventListener('click', () => reformatGuidde(), false);
+  document.getElementById('guido-x-init').classList.toggle('hide')
+}
 
 //main function to build the new index.html page
 //and collect the required files
@@ -17,11 +52,15 @@ async function reformatGuidde() {
   let video = getVideo(qg);
   let index = getIndex(slides, video, qg, settings);
 
+  //build filename for zip from quickguidde title
+  let zipname = qg.playbook.title.replace(/[^\p{L}_\-\. ]/gmu, '_');
+  zipname = zipname.replace(/^(.{25}[^\s]*).*/, "$1");
+
   let files = [];
   [index, video, ...slides].forEach(function(o){
     files.push(...o.getURLsAndFilenames());
   })
-  createZip(index.toString(), files);
+  createZip(zipname, index.toString(), files);
 }
 
 //build index html page and include slides, video
@@ -95,6 +134,7 @@ class HtmlTpl {
     document.querySelector("#result").append(p);
   }
 }
+
 //templating class for index.html page
 class IndexTpl extends HtmlTpl {
   constructor(title, slides, video, settings){
