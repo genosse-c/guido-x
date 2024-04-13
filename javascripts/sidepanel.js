@@ -38,7 +38,6 @@ async function reformatGuidde(ev) {
       settings[e.name] = e.value;
     }
   });
-  console.log(settings);
   const qg = await chrome.storage.local.get(["playbook"])
 
   let slides = getSlides(qg);
@@ -175,7 +174,9 @@ class IndexTpl extends HtmlTpl {
     this.slides.forEach((s) => main.append( s.render() ));
     //configure presentation
     if(this.settings['presentation'] == 'plain'){
-      Array.from(index.querySelectorAll('.extra')).forEach((e) => e.remove());
+      Array.from(index.querySelectorAll('.res-tiny-slider, .res-javascript')).forEach((e) => e.remove());
+    } else if (this.settings['presentation'] == 'plain-menu'){
+      Array.from(index.querySelectorAll('.res-tiny-slider')).forEach((e) => e.remove());
     } else if (this.settings['presentation'] == 'toggle'){
       body.insertAdjacentHTML('beforeend','<nav class="visi-controls"><button>Slideshow</button></nav>');
     }
@@ -183,12 +184,18 @@ class IndexTpl extends HtmlTpl {
   }
 
   getURLsAndFilenames(){
-    let files = [['resources/roboto-regular.woff2','resources/roboto-regular.woff2']];
+    let files = [[`resources/${this.settings["font"]}.woff2`,'resources/font.woff2']];
     //different forms of presentation require different styles / javascripts
     switch (this.settings['presentation']) {
       case 'plain':
         files.push(
           ['resources/plain.css','resources/styles.css']
+        );
+        break;
+      case 'plain-menu':
+        files.push(
+          ['resources/plain-menu.css','resources/styles.css'],
+          ['resources/plain-menu.js','resources/javascript.js'],
         );
         break;
       case 'slideshow':
